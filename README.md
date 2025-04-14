@@ -30,7 +30,7 @@ Models were evaluated using cross-validation (CV) and validation set performance
 | XGBoost               | ...     | ...             | ...             |
 
 
-## ⚙️ Techniques Applied
+## Techniques Applied
 
 - Data preprocessing (handling missing values, encoding, scaling)
 - Feature engineering
