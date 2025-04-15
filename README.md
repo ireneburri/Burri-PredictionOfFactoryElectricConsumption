@@ -25,15 +25,9 @@ Models were evaluated using cross-validation (CV) and validation set performance
 
 | Model                 | CV RMSE     | Validation RMSE | Best Parameters           |
 |-----------------------|-------------|-----------------|---------------------------|
-| Polynomial Regression | 3.99 ± 0.60 | 2.463049        | {'degree': 3,             |
-|                       |             |                 |  'include_bias': False}   |
-| Random Forest         | 2.60 ± 0.55 | 1.630461        | {'max_depth': None,       |
-|                       |             |                 |  'min_samples_split': 2,  | 
-|                       |             |                 |  'n_estimators': 200}     |
-| XGBoost               | 2.68 ± 0.49 | 1.48319         | {'learning_rate': 0.05,   |
-|                       |             |                 |  'max_depth': 8,          |
-|                       |             |                 |  'n_estimators': 1000,    |
-|                       |             |                 |  'subsample': 0.8 }       |
+| Polynomial Regression | 3.99 ± 0.60 | 2.463049        | {'degree': 3,'include_bias': False}   |
+| Random Forest         | 2.60 ± 0.55 | 1.630461        | {'max_depth': None,'min_samples_split': 2,'n_estimators': 200}     |
+| XGBoost               | 2.68 ± 0.49 | 1.48319         | {'learning_rate': 0.05, 'max_depth': 8, 'n_estimators': 1000, 'subsample': 0.8 }       |
 
 ## Techniques Applied
 
@@ -66,8 +60,3 @@ Models were evaluated using cross-validation (CV) and validation set performance
   - Setup instructions and environment requirements
 - **data/** – Includes training and test data 
 - **README.md** – Project overview, objectives, and references
-
----
-
-> Developed as a university project.  
-> *Author: Irene Burri — April 2025
