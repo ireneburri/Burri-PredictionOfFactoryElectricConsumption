@@ -7,8 +7,8 @@ To develop a regression model capable of predicting future electric consumption 
 
 ## Dataset Summary
 
-- **Training Set:** ~13,800 records
-- **Test Set:** ~2,160 records (target to predict)
+- **Training Set:** 13 872 records
+- **Test Set:** 2 160 records (target to predict)
 - **Target Variable:** `Electric_Consumption`
 - **Evaluation Metric:** RMSE (Root Mean Squared Error)
 
@@ -23,12 +23,17 @@ To develop a regression model capable of predicting future electric consumption 
 
 Models were evaluated using cross-validation (CV) and validation set performance:
 
-| Model                 | CV RMSE | Validation RMSE | Best Parameters |
-|-----------------------|---------|-----------------|-----------------|
-| Polynomial Regression | ...     | ...             | ...             |
-| Random Forest         | ...     | ...             | ...             |
-| XGBoost               | ...     | ...             | ...             |
-
+| Model                 | CV RMSE     | Validation RMSE | Best Parameters           |
+|-----------------------|-------------|-----------------|---------------------------|
+| Polynomial Regression | 3.99 ± 0.60 | 2.463049        | {'degree': 3,             |
+|                       |             |                 |  'include_bias': False}   |
+| Random Forest         | 2.60 ± 0.55 | 1.630461        | {'max_depth': None,       |
+|                       |             |                 |  'min_samples_split': 2,  | 
+|                       |             |                 |  'n_estimators': 200}     |
+| XGBoost               | 2.68 ± 0.49 | 1.48319         | {'learning_rate': 0.05,   |
+|                       |             |                 |  'max_depth': 8,          |
+|                       |             |                 |  'n_estimators': 1000,    |
+|                       |             |                 |  'subsample': 0.8 }       |
 
 ## Techniques Applied
 
@@ -39,5 +44,30 @@ Models were evaluated using cross-validation (CV) and validation set performance
 - Feature importance analysis
 - Clipping predictions to non-negative values
 
+## 🛠 Tools & Libraries
 
+- Python 3.9+
+- pandas, numpy, matplotlib, seaborn
+- scikit-learn
+- xgboost
+- joblib
 
+## References
+
+- [Kaggle Competition](https://www.kaggle.com/competitions/prediction-of-factory-electric-consumption/)
+- [Scikit-learn](https://scikit-learn.org/)
+- [XGBoost](https://xgboost.readthedocs.io/)
+
+## Contents
+
+- **delivery/** – Contains the complete solution:
+  - Python Notebook (`.ipynb`)
+  - PDF export of the notebook (landscape format)
+  - Setup instructions and environment requirements
+- **data/** – Includes training and test data 
+- **README.md** – Project overview, objectives, and references
+
+---
+
+> Developed as a university project.  
+> *Author: Irene Burri — April 2025
