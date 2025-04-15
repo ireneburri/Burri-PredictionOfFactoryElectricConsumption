@@ -9,7 +9,7 @@ To develop a regression model capable of predicting future electric consumption 
 
 - **Training Set:** 13 872 records
 - **Test Set:** 2 160 records (target to predict)
-- **Target Variable:** `Electric_Consumption`
+- **Target Variable:** Electric_Consumption
 - **Evaluation Metric:** RMSE (Root Mean Squared Error)
 
 ## Models Used
@@ -25,32 +25,19 @@ Models were evaluated using cross-validation (CV) and validation set performance
 
 | Model                 | CV RMSE     | Validation RMSE | Best Parameters           |
 |-----------------------|-------------|-----------------|---------------------------|
-| Polynomial Regression | 3.99 ± 0.60 | 2.463049        | {'degree': 3,             |
-|                       |             |                 |  'include_bias': False}   |
-| Random Forest         | 2.60 ± 0.55 | 1.630461        | {'max_depth': None,       |
-|                       |             |                 |  'min_samples_split': 2,  | 
-|                       |             |                 |  'n_estimators': 200}     |
-| XGBoost               | 2.68 ± 0.49 | 1.48319         | {'learning_rate': 0.05,   |
-|                       |             |                 |  'max_depth': 8,          |
-|                       |             |                 |  'n_estimators': 1000,    |
-|                       |             |                 |  'subsample': 0.8 }       |
+|Linear Regression     | 4.86 ± 0.0.66 | 4.51  | Default |                                                     
+| Polynomial Regression | 4.19 ± 1.05 | 2.40        | {'degree': 3, 'include_bias': False}   |
+| Random Forest         | 2.58 ± 0.54 | 1.63       | {'max_depth': None, 'min_samples_split': 2, 'n_estimators': 200}     |
+| XGBoost               | 2.78 ± 0.56 | 1.52         | {'learning_rate': 0.01, 'max_depth': 8, 'n_estimators': 1000, 'subsample': 0.8 }       |
 
 ## Techniques Applied
 
-- Data preprocessing (handling missing values, encoding, scaling)
+- Data preprocessing 
 - Feature engineering
 - Polynomial feature expansion
 - GridSearchCV for hyperparameter tuning
 - Feature importance analysis
 - Clipping predictions to non-negative values
-
-## 🛠 Tools & Libraries
-
-- Python 3.9+
-- pandas, numpy, matplotlib, seaborn
-- scikit-learn
-- xgboost
-- joblib
 
 ## References
 
@@ -67,7 +54,3 @@ Models were evaluated using cross-validation (CV) and validation set performance
 - **data/** – Includes training and test data 
 - **README.md** – Project overview, objectives, and references
 
----
-
-> Developed as a university project.  
-> *Author: Irene Burri — April 2025
