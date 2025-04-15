@@ -49,7 +49,9 @@ Models were evaluated using cross-validation (CV) and validation set performance
 
 - **delivery/** – Contains the complete solution:
   - Python Notebook (`.ipynb`)
-  - PDF export of the notebook (landscape format)
   - Setup instructions and environment requirements
-- **data/** – Includes training and test data 
+- **data/** – Includes training and test data
+- **doc/** - Contains:
+  - PDF export of the notebook
+  - Slides for the presentation (.tex)
 - **README.md** – Project overview, objectives, and references
