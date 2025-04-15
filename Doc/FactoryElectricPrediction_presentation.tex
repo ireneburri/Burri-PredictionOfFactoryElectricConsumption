@@ -1,0 +1,211 @@
+\documentclass{beamer}
+\usetheme{Madrid}
+\usepackage{graphicx}
+\usepackage{booktabs}
+
+\title[Factory Electric Consumption Prediction]{Factory Electric Consumption Prediction}
+\subtitle{A Regression-Based Forecasting Approach}
+\author{Irene Burri}
+\date{April 15, 2025}
+
+\begin{document}
+
+% Title Slide
+\begin{frame}
+  \titlepage
+\end{frame}
+
+% Project Objective
+\begin{frame}{Project Objective}
+  \begin{itemize}
+    \item Predict future electric consumption in a factory environment.
+    \item Use regression models to enhance energy efficiency and reduce costs.
+    \item Evaluation metric: \textbf{Root Mean Squared Error (RMSE)}.
+  \end{itemize}
+\end{frame}
+
+% Motivation
+\begin{frame}{Motivation}
+  \begin{itemize}
+    \item Rising energy costs and sustainability goals.
+    \item Accurate forecasts enable better planning and optimization.
+    \item Opportunity to identify seasonal trends and usage anomalies.
+  \end{itemize}
+\end{frame}
+
+% Dataset Overview
+\begin{frame}{Dataset Overview}
+  \begin{itemize}
+    \item \textbf{Training data:} 13,872 records
+    \item \textbf{Test data:} 2,160 records
+    \item \textbf{Target:} Electric Consumption
+    \item Numerical, categorical, and temporal features
+  \end{itemize}
+\end{frame}
+
+% Tools and Libraries
+\begin{frame}{Tools and Libraries}
+  \begin{itemize}
+    \item Python, Pandas, NumPy
+    \item Scikit-learn, XGBoost
+    \item Matplotlib, Seaborn
+    \item GridSearchCV for hyperparameter tuning
+  \end{itemize}
+\end{frame}
+
+% Data Preprocessing
+\begin{frame}{Data Preprocessing}
+  \begin{itemize}
+    \item Date formatting and Features Extraction of time-based features such as month, day, etc.
+    \item Outliers analysis through boxplots and distributions plots
+    \item Outliers treatment through clipping
+  \end{itemize}
+\end{frame}
+
+% Models Training and Evaluation
+\begin{frame}{Models Training and Evaluation}
+  \begin{itemize}
+    \item Linera Regression
+    \item Polynomial Regression
+    \item Random Forest Regressor
+    \item XGBoost Regressor
+  \end{itemize}
+  
+  
+  For each model, a feature importance analysis and cross-validation was performed to fine-tune the best hyper parameters.
+\end{frame}
+    
+
+% Linear Regression
+\begin{frame}{Model: Linear Regression}
+  \begin{itemize}
+    \item Simple baseline model
+    \item Fast to train but limited in performance
+    \item \textbf{Validation RMSE:} 4.51
+  \end{itemize}
+\end{frame}
+
+% Polynomial Regression
+\begin{frame}{Model: Polynomial Regression}
+  \begin{itemize}
+    \item Captures non-linear relationships
+    \item Tuned degree and bias 
+        \begin{itemize}
+            \item degree = 3,
+            \item include\_bias = false
+        \end{itemize}  
+    \item \textbf{Validation RMSE:} 2.40
+  \end{itemize}
+\end{frame}
+
+% Random Forest
+\begin{frame}{Model: Random Forest Regressor}
+  \begin{itemize}
+    \item Ensemble of decision trees
+    \item Tuned hyperparameters via GridSearchCV:
+        \begin{itemize}
+            \item max\_depth = None
+            \item min\_sample = 2
+            \item n\_estimators = 200
+        \end{itemize}  
+    \item \textbf{Validation RMSE:} 1.63
+  \end{itemize}
+\end{frame}
+
+% XGBoost
+\begin{frame}{Model: XGBoost Regressor}
+  \begin{itemize}
+    \item Gradient Boosting-based model
+    \item Best hyperparameters:
+    \begin{itemize}
+        \item learning\_rate = 0.01, max\_depth = 8
+        \item n\_estimators = 1000, subsample = 0.8
+    \end{itemize}
+    \item \textbf{Validation RMSE:} \textbf{1.52} (Best)
+  \end{itemize}
+\end{frame}
+
+% Cross-Validation Results
+\begin{frame}{Cross-Validation Results}
+\begin{center}
+\begin{tabular}{lcc}
+\toprule
+\textbf{Model} & \textbf{CV RMSE} & \textbf{Validation RMSE} \\
+\midrule
+Linear Regression & 4.86 ± 0.66 & 4.51 \\
+Polynomial Regression & 4.19 ± 1.05 & 2.40 \\
+Random Forest & 2.58 ± 0.54 & 1.63 \\
+XGBoost & 2.78 ± 0.56 & \textbf{1.52} \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{frame}
+
+% Model Comparison
+\begin{frame}{Model Comparison}
+  \begin{itemize}
+    \item XGBoost achieved the best performance but took more time.
+    \item Random Forest also performed well with low variance.
+    \item Polynomial Regression improved over linear baseline.
+  \end{itemize}
+\end{frame}
+
+% Feature Importance
+\begin{frame}{Feature Importance}
+  \begin{itemize}
+    \item XGBoost and Random Forest revealed most influential features.
+    \item Used for interpreting results and refining features.
+  \end{itemize}
+\end{frame}
+
+% Prediction Clipping
+\begin{frame}{Prediction Clipping}
+  \begin{itemize}
+    \item Ensured no negative consumption values.
+    \item Applied post-processing to clip predictions to zero minimum.
+  \end{itemize}
+\end{frame}
+
+% Visualization
+% \begin{frame}{Prediction vs Actual (Sample)}
+%   \centering
+%   \includegraphics[width=0.8\textwidth,draft]{prediction_vs_actual.png} % replace with actual image
+% \end{frame}
+
+% Challenges
+\begin{frame}{Challenges}
+  \begin{itemize}
+    \item Shift in feature distributions over time
+    \item Risk of overfitting in polynomial models
+    \item Computational cost of extensive grid search
+  \end{itemize}
+\end{frame}
+
+% % Future Work
+% \begin{frame}{Future Improvements}
+%   \begin{itemize}
+%     \item Time-series modeling (LSTM, Prophet)
+%     \item Real-time prediction pipeline
+%     \item Automated feature selection and tuning
+%   \end{itemize}
+% \end{frame}
+
+% Conclusion
+\begin{frame}{Conclusion}
+  \begin{itemize}
+    \item Successfully predicted factory electricity usage using regression models.
+    \item XGBoost yielded best performance (RMSE = 1.52).
+    \item Insights can support sustainable and cost-effective energy management.
+  \end{itemize}
+\end{frame}
+
+% References
+\begin{frame}{References}
+  \begin{itemize}
+    \item Kaggle Competition: \url{https://www.kaggle.com/competitions/prediction-of-factory-electric-consumption/}
+    \item Scikit-learn, XGBoost Documentation
+    \item GitHub project repository: \url{https://github.com/ireneburri/Burri-PredictionOfFactoryElectricConsumption.git}
+  \end{itemize}
+\end{frame}
+
+\end{document}
