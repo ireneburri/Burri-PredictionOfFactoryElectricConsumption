@@ -1,6 +1,7 @@
 \documentclass{beamer}
 \usetheme{Madrid}
 \usepackage{graphicx}
+\usepackage{subcaption}
 \usepackage{booktabs}
 
 \title[Factory Electric Consumption Prediction]{Factory Electric Consumption Prediction}
@@ -18,8 +19,8 @@
 % Project Objective
 \begin{frame}{Project Objective}
   \begin{itemize}
-    \item Predict future electric consumption in a factory environment.
-    \item Use regression models to enhance energy efficiency and reduce costs.
+    \item Develop a regression model to predict future electric consumption in a factory.
+    \item Optimize energy usage, reduce costs, and support sustainability.
     \item Evaluation metric: \textbf{Root Mean Squared Error (RMSE)}.
   \end{itemize}
 \end{frame}
@@ -38,8 +39,8 @@
   \begin{itemize}
     \item \textbf{Training data:} 13,872 records
     \item \textbf{Test data:} 2,160 records
-    \item \textbf{Target:} Electric Consumption
-    \item Numerical, categorical, and temporal features
+    \item \textbf{Target:} \textbf{Electric\_Consumption}
+    \item Provided by Kaggle: \url{https://www.kaggle.com/competitions/prediction-of-factory-electric-consumption/}
   \end{itemize}
 \end{frame}
 
@@ -54,28 +55,82 @@
 \end{frame}
 
 % Data Preprocessing
-\begin{frame}{Data Preprocessing}
-  \begin{itemize}
-    \item Date formatting and Features Extraction of time-based features such as month, day, etc.
-    \item Outliers analysis through boxplots and distributions plots
-    \item Outliers treatment through clipping
-  \end{itemize}
+\begin{frame}{Data Processing Steps}
+\begin{itemize}
+    \item Date Formatting and Feature Extraction of time-based features (Hour, Day, Month, DayOfWeek)
+    \item Outlier Detection and Clipping
+    \item Handling Missing Values
+    \item Encoding Categorical Features (Cyclical Encoding)
+\end{itemize}
+\begin{figure}
+    \centering
+    \includegraphics[width=0.9\linewidth]{images/Xtrain_head.png}
+    \caption{X\_train head after Data preprocessing}
+    \label{fig:enter-label}
+\end{figure}
 \end{frame}
+
+%Exploratory Data Analysis
+\begin{frame}{Exploratory Data Analysis}
+\begin{itemize}
+    \item Boxplots and Distribution plots used for outlier analysis
+    \item Correlation analysis to identify key features
+    \item Visualizations of electric consumption trends
+\end{itemize}
+\begin{figure}
+    \centering
+    \begin{subfigure}[t]{0.48\textwidth}
+        \includegraphics[width=\linewidth]{images/EC_Time.png}
+        \caption{Electric\_Consumption over Time}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[t]{0.48\textwidth}
+        \includegraphics[width=\linewidth]{images/Factors_Time.png}
+        \caption{Factors trend over Time}
+    \end{subfigure}
+\end{figure}
+% \begin{figure}
+%     \centering
+%     \includegraphics[width=0.4\linewidth]{images/Factors_Time.png}
+%     \caption{Electric consumption trend over time}
+%     \label{fig:enter-label}
+% \end{figure}
+\end{frame}
+
+% \begin{center}
+% \begin{minipage}{0.48\textwidth}
+%     \centering
+%     \includegraphics[width=\linewidth]{images/EC_Time.png}
+%     \caption*{Feature Importance - XGBoost}
+% \end{minipage}
+% \hfill
+% \begin{minipage}{0.48\textwidth}
+%     \centering
+%     \includegraphics[width=\linewidth]{images/Factors_Time.png}
+%     \caption*{Feature Importance - Random Forest}
+% \end{minipage}
+% \end{center}
 
 % Models Training and Evaluation
-\begin{frame}{Models Training and Evaluation}
-  \begin{itemize}
-    \item Linera Regression
-    \item Polynomial Regression
-    \item Random Forest Regressor
-    \item XGBoost Regressor
-  \end{itemize}
-  
-  
-  For each model, a feature importance analysis and cross-validation was performed to fine-tune the best hyper parameters.
+\begin{frame}{Models Used}
+\begin{itemize}
+    \item Linear Regression
+    \item Polynomial Regression (with Hyperparameters Tuning)
+    \item Random Forest Regressor (with Hyperparameters Tuning)
+    \item XGBoost Regressor (with Hyperparameters Tuning)
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Model Evaluation Criteria}
+\begin{itemize}
+    \item Cross-Validation RMSE
+    \item Validation RMSE
+    \item Hyperparameter tuning using GridSearchCV
+    \item Feature Importance Analysis
+    \item Post-processing to avoid negative predictions
+\end{itemize}
 \end{frame}
     
-
 % Linear Regression
 \begin{frame}{Model: Linear Regression}
   \begin{itemize}
@@ -83,6 +138,13 @@
     \item Fast to train but limited in performance
     \item \textbf{Validation RMSE:} 4.51
   \end{itemize}
+\begin{figure}
+\vfill
+    \centering
+    \includegraphics[width=0.6\linewidth]{images/lr.png}
+    \caption{Training Linear Regressor}
+    \label{fig:enter-label}
+\end{figure}
 \end{frame}
 
 % Polynomial Regression
@@ -96,6 +158,13 @@
         \end{itemize}  
     \item \textbf{Validation RMSE:} 2.40
   \end{itemize}
+  \begin{figure}
+\vfill
+    \centering
+    \includegraphics[width=0.6\linewidth]{images/pr.png}
+    \caption{Training Polynomial Regressor}
+    \label{fig:enter-label}
+\end{figure}
 \end{frame}
 
 % Random Forest
@@ -110,6 +179,13 @@
         \end{itemize}  
     \item \textbf{Validation RMSE:} 1.63
   \end{itemize}
+  \begin{figure}
+\vfill
+    \centering
+    \includegraphics[width=0.6\linewidth]{images/rf.png}
+    \caption{Training Random Forest Regressor}
+    \label{fig:enter-label}
+\end{figure}
 \end{frame}
 
 % XGBoost
@@ -123,23 +199,41 @@
     \end{itemize}
     \item \textbf{Validation RMSE:} \textbf{1.52} (Best)
   \end{itemize}
+  \begin{figure}
+\vfill
+    \centering
+    \includegraphics[width=0.6\linewidth]{images/xgboost.png}
+    \caption{Training XGBoost Regressor}
+    \label{fig:enter-label}
+\end{figure}
 \end{frame}
 
-% Cross-Validation Results
-\begin{frame}{Cross-Validation Results}
-\begin{center}
-\begin{tabular}{lcc}
-\toprule
-\textbf{Model} & \textbf{CV RMSE} & \textbf{Validation RMSE} \\
-\midrule
-Linear Regression & 4.86 ± 0.66 & 4.51 \\
-Polynomial Regression & 4.19 ± 1.05 & 2.40 \\
-Random Forest & 2.58 ± 0.54 & 1.63 \\
-XGBoost & 2.78 ± 0.56 & \textbf{1.52} \\
-\bottomrule
-\end{tabular}
-\end{center}
+% Post-processing
+\begin{frame}{Post-processing}
+  \begin{itemize}
+    \item Ensured no negative consumption values.
+    \item Applied post-processing to clip predictions to zero minimum.
+  \end{itemize}
 \end{frame}
+
+% Performance Comparison
+\begin{frame}{Performance Comparison}
+\small
+    \begin{tabular}{lccc}
+        \toprule
+        \textbf{Model} & \textbf{CV RMSE ± std} & \textbf{RMSE} & \textbf{Best Params} \\
+        \midrule
+        Linear Reg. & 3.48 ± 0.20 & 3.19 & Default \\
+        &&&\\
+        Poly. Reg. & 3.06 ± 1.11 & 2.24 & deg=2, include\_bias=True \\
+        &&&\\
+        Random Forest & 2.43 ± 0.45 & 1.67 & est=200, depth=None, \\ &&&min\_sample\_split=2 \\
+        &&&\\
+        \textbf{XGBoost} & 2.52 ± 0.43 & \textbf{1.49} & lr=0.05, depth=6, est=1000,\\ &&&subsample=0.8\\
+        \bottomrule
+    \end{tabular}
+\end{frame}
+
 
 % Model Comparison
 \begin{frame}{Model Comparison}
@@ -150,45 +244,29 @@ XGBoost & 2.78 ± 0.56 & \textbf{1.52} \\
   \end{itemize}
 \end{frame}
 
-% Feature Importance
 \begin{frame}{Feature Importance}
-  \begin{itemize}
+\begin{itemize}
     \item XGBoost and Random Forest revealed most influential features.
-    \item Used for interpreting results and refining features.
-  \end{itemize}
+    \item Attempts to remove less important features degraded model performance.
+    \item All available engineered features retained for final model.
+\end{itemize}
+  \begin{figure}
+\vfill
+    \centering
+    \includegraphics[width=0.6\linewidth]{images/fi_xgb.png}
+    \caption{Top 5 Feature Importances}
+    \label{fig:enter-label}
+\end{figure}
 \end{frame}
 
-% Prediction Clipping
-\begin{frame}{Prediction Clipping}
-  \begin{itemize}
-    \item Ensured no negative consumption values.
-    \item Applied post-processing to clip predictions to zero minimum.
-  \end{itemize}
+\begin{frame}{Final Model}
+\begin{itemize}
+    \item \textbf{Best model: XGBoost Regressor}
+    \item Final RMSE on validation set: \textbf{1.52}
+    \item Cleaned and well-engineered features contribute to high performance.
+    \item Further improvements may be possible with deep learning.
+\end{itemize}
 \end{frame}
-
-% Visualization
-% \begin{frame}{Prediction vs Actual (Sample)}
-%   \centering
-%   \includegraphics[width=0.8\textwidth,draft]{prediction_vs_actual.png} % replace with actual image
-% \end{frame}
-
-% Challenges
-\begin{frame}{Challenges}
-  \begin{itemize}
-    \item Shift in feature distributions over time
-    \item Risk of overfitting in polynomial models
-    \item Computational cost of extensive grid search
-  \end{itemize}
-\end{frame}
-
-% % Future Work
-% \begin{frame}{Future Improvements}
-%   \begin{itemize}
-%     \item Time-series modeling (LSTM, Prophet)
-%     \item Real-time prediction pipeline
-%     \item Automated feature selection and tuning
-%   \end{itemize}
-% \end{frame}
 
 % Conclusion
 \begin{frame}{Conclusion}
@@ -197,6 +275,13 @@ XGBoost & 2.78 ± 0.56 & \textbf{1.52} \\
     \item XGBoost yielded best performance (RMSE = 1.52).
     \item Insights can support sustainable and cost-effective energy management.
   \end{itemize}
+    \begin{figure}
+\vfill
+    \centering
+    \includegraphics[width=0.5\linewidth]{images/predictedEC.png}
+    \caption{Predicted Electric Consumption over Time}
+    \label{fig:enter-label}
+\end{figure}
 \end{frame}
 
 % References
@@ -209,3 +294,7 @@ XGBoost & 2.78 ± 0.56 & \textbf{1.52} \\
 \end{frame}
 
 \end{document}
+
+
+
+

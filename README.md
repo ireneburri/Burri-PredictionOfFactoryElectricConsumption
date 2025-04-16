@@ -19,39 +19,46 @@ To develop a regression model capable of predicting future electric consumption 
 - **Random Forest Regressor** (with hyperparameter tuning)
 - **XGBoost Regressor** (with hyperparameter tuning)
 
+## Project Structure
+
+- **Libraries Used**
+- **Data Visualization and Exploration**
+- **Data Processing:**
+    - **Feature Extraction** 
+    - **Outliers Analysis** 
+    - **Checks for missing values**
+    - **Encoding of non-numerical features** 
+- **Models Training and Evalutaion:** Different models were tried: *Linear Regression*, *Polynomial Regression*, *Random Forest Regressor*, *XGBoost Regressor*. For each model it was performed:
+  - **Cross-Validation RMSE**
+  - Hyperparameters tuning using **GridSearchCV**
+  - **Feature Importance analysis**
+  - **RMSE** on the validation set
+  - **Post-processing** to ensure predictions are non-negative
+- **Results and Comparison**
+
 ## Model Evaluation
 
 Models were evaluated using cross-validation (CV) and validation set performance:
 
-| Model                 | CV RMSE     | Validation RMSE | Best Parameters           |
-|-----------------------|-------------|-----------------|---------------------------|
-|Linear Regression     | 4.86 ± 0.0.66 | 4.51  | Default |                                                     
-| Polynomial Regression | 4.19 ± 1.05 | 2.40        | {'degree': 3, 'include_bias': False}   |
-| Random Forest         | 2.58 ± 0.54 | 1.63       | {'max_depth': None, 'min_samples_split': 2, 'n_estimators': 200}     |
-| XGBoost               | 2.78 ± 0.56 | 1.52         | {'learning_rate': 0.01, 'max_depth': 8, 'n_estimators': 1000, 'subsample': 0.8 }       |
+| Model                 | CV RMSE   | Std. Dev. | Validation RMSE | Best Parameters |
+|-----------------------|-----------|-----------|------------------|-----------------|
+| Linear Regression     | 3.476     | 0.199     | 3.192            | Default |
+| Polynomial Regression | 3.064     | 1.112     | 2.241            | `{'polynomialfeatures__degree': 2, 'polynomialfeatures__include_bias': True}` |
+| Random Forest         | 2.434     | 0.450     | 1.674            | `{'max_depth': None, 'min_samples_split': 2, 'n_estimators': 200}` |
+| XGBoost               | 2.520     | 0.430     | **1.494**        | `{'learning_rate': 0.05, 'max_depth': 6, 'n_estimators': 1000, 'predictor': 'cpu_predictor', 'subsample': 0.8, 'tree_method': 'hist'}` |
 
-## Techniques Applied
-
-- Data preprocessing 
-- Feature engineering
-- Polynomial feature expansion
-- GridSearchCV for hyperparameter tuning
-- Feature importance analysis
-- Clipping predictions to non-negative values
 
 ## References
 
 - [Kaggle Competition](https://www.kaggle.com/competitions/prediction-of-factory-electric-consumption/)
-- [Scikit-learn](https://scikit-learn.org/)
-- [XGBoost](https://xgboost.readthedocs.io/)
 
 ## Contents
 
-- **delivery/** – Contains the complete solution:
-  - Python Notebook (`.ipynb`)
+- **Software_and_Data/** – Contains the complete solution:
+  - Python Notebook (`.ipynb` and `.pdf`)
   - Setup instructions and environment requirements
-- **data/** – Includes training and test data
-- **doc/** - Contains:
-  - PDF export of the notebook
-  - Slides for the presentation (.tex)
-- **README.md** – Project overview, objectives, and references
+  - **Data/** – Includes training, test data and a submission folder with the different predictions
+  - **README.md** – Project description
+- **Doc/** - Contains:
+  - Slides for the presentation (`.tex` and `.pdf`)
+- **README.md** – Project overview
