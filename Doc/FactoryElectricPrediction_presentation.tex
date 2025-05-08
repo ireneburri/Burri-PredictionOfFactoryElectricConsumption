@@ -136,7 +136,7 @@
   \begin{itemize}
     \item Simple baseline model
     \item Fast to train but limited in performance
-    \item \textbf{Validation RMSE:} 4.51
+    \item \textbf{Validation RMSE:} 3.19
   \end{itemize}
 \begin{figure}
 \vfill
@@ -153,10 +153,10 @@
     \item Captures non-linear relationships
     \item Tuned degree and bias 
         \begin{itemize}
-            \item degree = 3,
-            \item include\_bias = false
+            \item degree = 2,
+            \item include\_bias = True
         \end{itemize}  
-    \item \textbf{Validation RMSE:} 2.40
+    \item \textbf{Validation RMSE:} 2.24
   \end{itemize}
   \begin{figure}
 \vfill
@@ -177,7 +177,7 @@
             \item min\_sample = 2
             \item n\_estimators = 200
         \end{itemize}  
-    \item \textbf{Validation RMSE:} 1.63
+    \item \textbf{Validation RMSE:} 1.67
   \end{itemize}
   \begin{figure}
 \vfill
@@ -194,10 +194,10 @@
     \item Gradient Boosting-based model
     \item Best hyperparameters:
     \begin{itemize}
-        \item learning\_rate = 0.01, max\_depth = 8
+        \item learning\_rate = 0.05, max\_depth = 6
         \item n\_estimators = 1000, subsample = 0.8
     \end{itemize}
-    \item \textbf{Validation RMSE:} \textbf{1.52} (Best)
+    \item \textbf{Validation RMSE:} \textbf{1.49} (Best)
   \end{itemize}
   \begin{figure}
 \vfill
@@ -262,7 +262,7 @@
 \begin{frame}{Final Model}
 \begin{itemize}
     \item \textbf{Best model: XGBoost Regressor}
-    \item Final RMSE on validation set: \textbf{1.52}
+    \item Final RMSE on validation set: \textbf{1.49}
     \item Cleaned and well-engineered features contribute to high performance.
     \item Further improvements may be possible with deep learning.
 \end{itemize}
@@ -272,7 +272,7 @@
 \begin{frame}{Conclusion}
   \begin{itemize}
     \item Successfully predicted factory electricity usage using regression models.
-    \item XGBoost yielded best performance (RMSE = 1.52).
+    \item XGBoost yielded best performance (RMSE = 1.49).
     \item Insights can support sustainable and cost-effective energy management.
   \end{itemize}
     \begin{figure}
